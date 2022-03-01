@@ -28,4 +28,4 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/test-next.pem
           sudo chmod 400 ~/.ssh/test-next.pem
       - name: Deploy
-        run: ssh -i ~/.ssh/test-next.pem ubuntu@54.180.146.249 "cd test-nextjs; sh start.sh"
+        run: ssh -o StrictHostKeyChecking=no -i ~/.ssh/test-next.pem ubuntu@54.180.146.249 "cd test-nextjs; sh start.sh"

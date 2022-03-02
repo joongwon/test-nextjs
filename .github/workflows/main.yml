@@ -31,7 +31,11 @@ jobs:
           script_stop: true
           script: |
             cd test-nextjs
+            echo ===== git pull =====
             git pull
+            echo ===== npm install =====
             npm install
-            npm build
+            echo ===== npm run build =====
+            npm run build
+            echo ===== pm2 reload test =====
             pm2 reload test

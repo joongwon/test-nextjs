@@ -31,11 +31,11 @@ jobs:
           script_stop: true
           script: |
             cd test-nextjs
-            echo ===== git pull =====
+            echo "===== git pull ====="
             git pull
-            echo ===== npm install =====
+            echo "===== npm install ====="
             npm install
-            echo ===== npm run build =====
+            echo "===== npm run build ====="
             npm run build
-            echo ===== pm2 reload test =====
-            pm2 reload test
+            echo "===== pm2 reload ... ====="
+            pm2 reload ${{ secrets.PM2_NAME }}

@@ -22,10 +22,15 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Create pem file
-        run: |
-          mkdir -p ~/.ssh/
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/test-next.pem
-          sudo chmod 400 ~/.ssh/test-next.pem
       - name: Deploy
-        run: ssh -o StrictHostKeyChecking=no -i ~/.ssh/test-next.pem ubuntu@54.180.146.249 "cd test-nextjs; sh start.sh"
+        uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          script: |
+            cd test-nextjs
+            git pull
+            npm install
+            npm build
+            pm2 reload test
